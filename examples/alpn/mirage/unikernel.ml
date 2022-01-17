@@ -20,7 +20,7 @@
  *)
 open Lwt.Infix
 
-module type HTTP = Httpaf_mirage.Server
+module type HTTP = Dream_httpaf_mirage.Server
 module type HTTP2 = H2_mirage.Server
 
 module Dispatch (Http : HTTP) (Https : HTTP) (Http2 : HTTP2) = struct
@@ -53,8 +53,8 @@ struct
   module X509 = Tls_mirage.X509 (KEYS) (Clock)
   module TCP = S.TCPV4
   module TLS = Tls_mirage.Make (TCP)
-  module Http = Httpaf_mirage.Server (TCP)
-  module Https = Httpaf_mirage.Server (TLS)
+  module Http = Dream_httpaf_mirage.Server (TCP)
+  module Https = Dream_httpaf_mirage.Server (TLS)
   module Http2 = H2_mirage.Server (TLS)
   module D = Dispatch (Http) (Https) (Http2)
 

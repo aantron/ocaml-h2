@@ -1,4 +1,4 @@
-open Httpaf
+open Dream_httpaf
 
 let redirect_handler : Reqd.t Gluten.reqd -> unit =
  fun { Gluten.reqd; _ } ->

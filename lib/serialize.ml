@@ -33,7 +33,7 @@
  *---------------------------------------------------------------------------*)
 
 open Faraday
-module IOVec = Httpaf.IOVec
+module IOVec = Dream_httpaf.IOVec
 
 type frame_info =
   { flags : Flags.t
@@ -469,7 +469,7 @@ module Writer = struct
       hpack_encoder
       faraday
       { Headers.name = ":method"
-      ; value = Httpaf.Method.to_string meth
+      ; value = Dream_httpaf.Method.to_string meth
       ; sensitive = false
       };
     if meth <> `CONNECT

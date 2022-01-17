@@ -33,8 +33,8 @@
  *---------------------------------------------------------------------------*)
 
 module Headers = Headers
-module IOVec = Httpaf.IOVec
-module Method = Httpaf.Method
+module IOVec = Dream_httpaf.IOVec
+module Method = Dream_httpaf.Method
 module Reqd = Reqd
 module Request = Request
 module Response = Response

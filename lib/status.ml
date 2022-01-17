@@ -38,17 +38,17 @@
  *
  *   Note: While the above is true, we don't enforce in this library, as it
  *   makes unifying types with http/af much easier. `H2.Status.t` is, thus, a
- *   strict superset of `Httpaf.Status.t`. *)
+ *   strict superset of `Dream_httpaf.Status.t`. *)
 
 include (
-  Httpaf.Status :
-    module type of Httpaf.Status
-      with type client_error := Httpaf.Status.client_error
-       and type standard := Httpaf.Status.standard
-       and type t := Httpaf.Status.t)
+  Dream_httpaf.Status :
+    module type of Dream_httpaf.Status
+      with type client_error := Dream_httpaf.Status.client_error
+       and type standard := Dream_httpaf.Status.standard
+       and type t := Dream_httpaf.Status.t)
 
 type client_error =
-  [ Httpaf.Status.client_error
+  [ Dream_httpaf.Status.client_error
   | (* From RFC7540§9.1.2:
      *   The 421 (Misdirected Request) status code indicates that the request
      *   was directed at a server that is not able to produce a response. This
@@ -59,7 +59,7 @@ type client_error =
   ]
 
 type standard =
-  [ Httpaf.Status.standard
+  [ Dream_httpaf.Status.standard
   | client_error
   ]
 
@@ -76,47 +76,47 @@ type t =
  *   included in an HTTP/1.1 status line. *)
 let default_reason_phrase = function
   | `Misdirected_request -> "Misdirected Request"
-  | #Httpaf.Status.standard as t -> Httpaf.Status.default_reason_phrase t
+  | #Dream_httpaf.Status.standard as t -> Dream_httpaf.Status.default_reason_phrase t
 
 let to_code = function
   | `Misdirected_request -> 421
-  | #Httpaf.Status.t as t -> Httpaf.Status.to_code t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.to_code t
 
 let unsafe_of_code = function
   | 421 -> `Misdirected_request
-  | c -> (Httpaf.Status.unsafe_of_code c :> t)
+  | c -> (Dream_httpaf.Status.unsafe_of_code c :> t)
 
 let of_code = function
   | 421 -> `Misdirected_request
-  | c -> (Httpaf.Status.of_code c :> t)
+  | c -> (Dream_httpaf.Status.of_code c :> t)
 
 let is_informational = function
   | `Misdirected_request -> false
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_informational t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_informational t
 
 let is_successful = function
   | `Misdirected_request -> false
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_successful t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_successful t
 
 let is_redirection = function
   | `Misdirected_request -> false
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_redirection t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_redirection t
 
 let is_client_error = function
   | `Misdirected_request -> true
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_client_error t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_client_error t
 
 let is_server_error = function
   | `Misdirected_request -> false
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_server_error t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_server_error t
 
 let is_error = function
   | `Misdirected_request -> true
-  | #Httpaf.Status.t as t -> Httpaf.Status.is_error t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.is_error t
 
 let to_string = function
   | `Misdirected_request -> "421"
-  | #Httpaf.Status.t as t -> Httpaf.Status.to_string t
+  | #Dream_httpaf.Status.t as t -> Dream_httpaf.Status.to_string t
 
 let of_string x = of_code (int_of_string x)
 let pp_hum fmt t = Format.fprintf fmt "%u" (to_code t)

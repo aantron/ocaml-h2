@@ -21,7 +21,7 @@ depends: [
   "faraday" {>= "0.5.0"}
   "psq"
   "hpack"
-  "httpaf"
+  "dream-httpaf"
 ]
 synopsis:
   "A high-performance, memory-efficient, and scalable HTTP/2 library for OCaml"

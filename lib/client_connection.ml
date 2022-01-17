@@ -210,12 +210,12 @@ let handle_push_promise_headers t respd headers =
      *   error (Section 5.4.2) of type PROTOCOL_ERROR. *)
     report_stream_error t respd.Stream.id Error_code.ProtocolError
   | `Valid (meth, path, scheme) ->
-    let meth = Httpaf.Method.of_string meth in
+    let meth = Dream_httpaf.Method.of_string meth in
     (match
        meth, Headers.get_pseudo headers "authority", Message.body_length headers
      with
-    | (#Httpaf.Method.standard as meth), _, _
-      when not Httpaf.Method.(is_cacheable meth && is_safe meth) ->
+    | (#Dream_httpaf.Method.standard as meth), _, _
+      when not Dream_httpaf.Method.(is_cacheable meth && is_safe meth) ->
       report_stream_error t respd.id Error_code.ProtocolError
     | _, _, `Fixed len when not (Int64.equal len 0L) ->
       (* From RFC7540§8.2:
@@ -1330,7 +1330,7 @@ let create_h2c
     ~error_handler
     (response_handler, response_error_handler)
   =
-  let { Httpaf.Request.target; meth; _ } = http_request in
+  let { Dream_httpaf.Request.target; meth; _ } = http_request in
   match Headers.of_http1 http_request with
   | Ok headers ->
     (* From RFC7540§3.2:

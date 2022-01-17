@@ -4,7 +4,7 @@ module Http2 = struct
   open H2
 
   let connection_handler
-      :  Httpaf.Request.t -> Bigstringaf.t H2.IOVec.t list
+      :  Dream_httpaf.Request.t -> Bigstringaf.t H2.IOVec.t list
       -> (Server_connection.t, string) result
     =
     let request_handler : H2.Server_connection.request_handler =
@@ -75,11 +75,11 @@ module Http2 = struct
 end
 
 let connection_handler =
-  let module Body = Httpaf.Body in
-  let module Headers = Httpaf.Headers in
-  let module Reqd = Httpaf.Reqd in
-  let module Response = Httpaf.Response in
-  let module Status = Httpaf.Status in
+  let module Body = Dream_httpaf.Body in
+  let module Headers = Dream_httpaf.Headers in
+  let module Reqd = Dream_httpaf.Reqd in
+  let module Response = Dream_httpaf.Response in
+  let module Status = Dream_httpaf.Status in
   let upgrade_handler request upgrade () =
     let off = 0 in
     let len = 3 in
@@ -105,7 +105,7 @@ let connection_handler =
     Body.Writer.write_string body message;
     Body.Writer.close body
   in
-  let request_handler _addr (reqd : Httpaf.Reqd.t Gluten.reqd) =
+  let request_handler _addr (reqd : Dream_httpaf.Reqd.t Gluten.reqd) =
     let { Gluten.reqd; upgrade } = reqd in
     let headers =
       Headers.of_list [ "Connection", "Upgrade"; "Upgrade", "h2c" ]
@@ -113,7 +113,7 @@ let connection_handler =
     let request = Reqd.request reqd in
     Reqd.respond_with_upgrade reqd headers (upgrade_handler request upgrade)
   in
-  Httpaf_lwt_unix.Server.create_connection_handler
+  Dream_httpaf_lwt_unix.Server.create_connection_handler
     ?config:None
     ~request_handler
     ~error_handler:http_error_handler
