@@ -44,7 +44,7 @@ module Server : sig
   module SSL : sig
     include
       H2_async_intf.Server
-        with type 'a socket := 'a Gluten_async.Server.SSL.socket
+        with type 'a socket := 'a Dream_gluten_async.Server.SSL.socket
 
     val create_connection_handler_with_default
       :  certfile:string
@@ -67,7 +67,7 @@ module Client : sig
   module SSL : sig
     include
       H2_async_intf.Client
-        with type 'a socket = 'a Gluten_async.Client.SSL.socket
+        with type 'a socket = 'a Dream_gluten_async.Client.SSL.socket
 
     val create_connection_with_default
       :  ?config:Config.t

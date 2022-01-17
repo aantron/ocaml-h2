@@ -1,7 +1,7 @@
 open Dream_httpaf
 
-let redirect_handler : Unix.sockaddr -> Reqd.t Gluten.reqd -> unit =
- fun _client_address { Gluten.reqd; _ } ->
+let redirect_handler : Unix.sockaddr -> Reqd.t Dream_gluten.reqd -> unit =
+ fun _client_address { Dream_gluten.reqd; _ } ->
   let response =
     Response.create
       ~headers:
@@ -19,8 +19,8 @@ let redirect_error_handler
   let response_body = start_response Headers.empty in
   Body.Writer.close response_body
 
-let request_handler : Unix.sockaddr -> Reqd.t Gluten.reqd -> unit =
- fun _client_address { Gluten.reqd; _ } ->
+let request_handler : Unix.sockaddr -> Reqd.t Dream_gluten.reqd -> unit =
+ fun _client_address { Dream_gluten.reqd; _ } ->
   let request = Reqd.request reqd in
   let response_content_type =
     match Headers.get request.headers "Content-Type" with

@@ -1396,7 +1396,7 @@ let read t bs ~off ~len = Reader.read_with_more t.reader bs ~off ~len Incomplete
 let read_eof t bs ~off ~len =
   Reader.read_with_more t.reader bs ~off ~len Complete
 
-(* XXX(anmonteiro): this function is here to please the Gluten `RUNTIME`
+(* XXX(anmonteiro): this function is here to please the Dream_gluten `RUNTIME`
  * interface.
  *
  * We don't expect this function to ever be called. H2 never issues `Yield`

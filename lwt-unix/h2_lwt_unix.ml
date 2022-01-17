@@ -34,10 +34,10 @@ open Lwt.Infix
 module Config = H2.Config
 
 module Server = struct
-  include H2_lwt.Server (Gluten_lwt_unix.Server)
+  include H2_lwt.Server (Dream_gluten_lwt_unix.Server)
 
   module TLS = struct
-    include H2_lwt.Server (Gluten_lwt_unix.Server.TLS)
+    include H2_lwt.Server (Dream_gluten_lwt_unix.Server.TLS)
 
     let create_connection_handler_with_default
         ~certfile
@@ -47,7 +47,7 @@ module Server = struct
         ~error_handler
       =
       let make_tls_server =
-        Gluten_lwt_unix.Server.TLS.create_default
+        Dream_gluten_lwt_unix.Server.TLS.create_default
           ~alpn_protocols:[ "h2" ]
           ~certfile
           ~keyfile
@@ -63,7 +63,7 @@ module Server = struct
   end
 
   module SSL = struct
-    include H2_lwt.Server (Gluten_lwt_unix.Server.SSL)
+    include H2_lwt.Server (Dream_gluten_lwt_unix.Server.SSL)
 
     let create_connection_handler_with_default
         ~certfile
@@ -73,7 +73,7 @@ module Server = struct
         ~error_handler
       =
       let make_ssl_server =
-        Gluten_lwt_unix.Server.SSL.create_default
+        Dream_gluten_lwt_unix.Server.SSL.create_default
           ~alpn_protocols:[ "h2" ]
           ~certfile
           ~keyfile
@@ -90,10 +90,10 @@ module Server = struct
 end
 
 module Client = struct
-  include H2_lwt.Client (Gluten_lwt_unix.Client)
+  include H2_lwt.Client (Dream_gluten_lwt_unix.Client)
 
   module TLS = struct
-    include H2_lwt.Client (Gluten_lwt_unix.Client.TLS)
+    include H2_lwt.Client (Dream_gluten_lwt_unix.Client.TLS)
 
     let create_connection_with_default
         ?config
@@ -101,13 +101,13 @@ module Client = struct
         ~error_handler
         socket
       =
-      Gluten_lwt_unix.Client.TLS.create_default ~alpn_protocols:[ "h2" ] socket
+      Dream_gluten_lwt_unix.Client.TLS.create_default ~alpn_protocols:[ "h2" ] socket
       >>= fun tls_client ->
       create_connection ?config ?push_handler ~error_handler tls_client
   end
 
   module SSL = struct
-    include H2_lwt.Client (Gluten_lwt_unix.Client.SSL)
+    include H2_lwt.Client (Dream_gluten_lwt_unix.Client.SSL)
 
     let create_connection_with_default
         ?config
@@ -115,7 +115,7 @@ module Client = struct
         ~error_handler
         socket
       =
-      Gluten_lwt_unix.Client.SSL.create_default ~alpn_protocols:[ "h2" ] socket
+      Dream_gluten_lwt_unix.Client.SSL.create_default ~alpn_protocols:[ "h2" ] socket
       >>= fun ssl_client ->
       create_connection ?config ?push_handler ~error_handler ssl_client
   end

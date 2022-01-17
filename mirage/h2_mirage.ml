@@ -31,7 +31,7 @@
  *---------------------------------------------------------------------------*)
 
 module Server (Flow : Mirage_flow.S) = struct
-  module Server_runtime = H2_lwt.Server (Gluten_mirage.Server (Flow))
+  module Server_runtime = H2_lwt.Server (Dream_gluten_mirage.Server (Flow))
 
   type socket = Flow.flow
 
@@ -62,7 +62,7 @@ end
 module type Client = H2_lwt.Client
 
 module Client (Flow : Mirage_flow.S) = struct
-  include H2_lwt.Client (Gluten_mirage.Client (Flow))
+  include H2_lwt.Client (Dream_gluten_mirage.Client (Flow))
 
   type socket = Flow.flow
 
@@ -71,5 +71,5 @@ module Client (Flow : Mirage_flow.S) = struct
       ?config
       ?push_handler
       ~error_handler
-      (Gluten_mirage.Buffered_flow.create flow)
+      (Dream_gluten_mirage.Buffered_flow.create flow)
 end

@@ -35,7 +35,7 @@
 open Lwt.Infix
 include H2_lwt_intf
 
-module Server (Server_runtime : Gluten_lwt.Server) = struct
+module Server (Server_runtime : Dream_gluten_lwt.Server) = struct
   type socket = Server_runtime.socket
 
   let create_connection_handler
@@ -59,7 +59,7 @@ module Server (Server_runtime : Gluten_lwt.Server) = struct
       socket
 end
 
-module Client (Client_runtime : Gluten_lwt.Client) = struct
+module Client (Client_runtime : Dream_gluten_lwt.Client) = struct
   type socket = Client_runtime.socket
   type runtime = Client_runtime.t
 

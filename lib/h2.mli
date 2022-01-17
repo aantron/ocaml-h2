@@ -768,7 +768,7 @@ module Server_connection : sig
   val yield_reader : t -> (unit -> unit) -> unit
   (** [yield_reader t continue] immediately calls [continue]. This function *
       shouldn't generally be called and it's only here to simplify adhering * to
-      the Gluten [RUNTIME] module type. *)
+      the Dream_gluten [RUNTIME] module type. *)
 
   val report_exn : t -> exn -> unit
   (** [report_exn t exn] reports that an error [exn] has been caught and that it
@@ -933,7 +933,7 @@ module Client_connection : sig
   val yield_reader : t -> (unit -> unit) -> unit
   (** [yield_reader t continue] immediately calls [continue]. This function *
       shouldn't generally be called and it's only here to simplify adhering * to
-      the Gluten [RUNTIME] module type. *)
+      the Dream_gluten [RUNTIME] module type. *)
 
   val report_exn : t -> exn -> unit
   (** [report_exn t exn] reports that an error [exn] has been caught and that it

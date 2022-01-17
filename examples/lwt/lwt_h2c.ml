@@ -92,7 +92,7 @@ let connection_handler =
     let connection =
       Stdlib.Result.get_ok (Http2.connection_handler request body)
     in
-    upgrade (Gluten.make (module H2.Server_connection) connection)
+    upgrade (Dream_gluten.make (module H2.Server_connection) connection)
   in
   let http_error_handler _client_address ?request:_ error handle =
     let message =
@@ -105,8 +105,8 @@ let connection_handler =
     Body.Writer.write_string body message;
     Body.Writer.close body
   in
-  let request_handler _addr (reqd : Dream_httpaf.Reqd.t Gluten.reqd) =
-    let { Gluten.reqd; upgrade } = reqd in
+  let request_handler _addr (reqd : Dream_httpaf.Reqd.t Dream_gluten.reqd) =
+    let { Dream_gluten.reqd; upgrade } = reqd in
     let headers =
       Headers.of_list [ "Connection", "Upgrade"; "Upgrade", "h2c" ]
     in
