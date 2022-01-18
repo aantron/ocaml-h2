@@ -33,48 +33,48 @@
  *---------------------------------------------------------------------------*)
 
 open Async
-open H2
+open Dream_h2
 
 module Server = struct
   type 'a socket = ([ `Active ], ([< Socket.Address.t ] as 'a)) Socket.t
 
   let create_connection_handler
-      ?(config = H2.Config.default)
+      ?(config = Dream_h2.Config.default)
       ~request_handler
       ~error_handler
       client_addr
       socket
     =
     let connection =
-      H2.Server_connection.create
+      Dream_h2.Server_connection.create
         ~config
         ~error_handler:(error_handler client_addr)
         (request_handler client_addr)
     in
     Dream_gluten_async.Server.create_connection_handler
       ~read_buffer_size:config.read_buffer_size
-      ~protocol:(module H2.Server_connection)
+      ~protocol:(module Dream_h2.Server_connection)
       connection
       client_addr
       socket
 
   module SSL = struct
     let create_connection_handler
-        ?(config = H2.Config.default)
+        ?(config = Dream_h2.Config.default)
         ~request_handler
         ~error_handler
         client_addr
         socket
       =
       let connection =
-        H2.Server_connection.create
+        Dream_h2.Server_connection.create
           ~config
           ~error_handler:(error_handler client_addr)
           (request_handler client_addr)
       in
       Dream_gluten_async.Server.SSL.create_connection_handler
         ~read_buffer_size:config.read_buffer_size
-        ~protocol:(module H2.Server_connection)
+        ~protocol:(module Dream_h2.Server_connection)
         connection
         client_addr
         socket

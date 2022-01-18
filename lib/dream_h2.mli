@@ -32,7 +32,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-(** H2 is a high-performance, memory-efficient, and scalable HTTP/2
+(** Dream_h2 is a high-performance, memory-efficient, and scalable HTTP/2
     implementation for OCaml. It is based on the concepts in http/af, and
     therefore uses the Angstrom and Faraday libraries to implement the parsing
     and serialization layers of the HTTP/2 standard. It also preserves the same

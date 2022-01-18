@@ -1,4 +1,4 @@
-open H2__
+open Dream_h2__
 
 module Option = struct
   let get = function Some x -> x | None -> failwith "Option.get: None"
@@ -104,7 +104,7 @@ let parse_frames_bigstring wire =
   in
   let reader =
     Reader.server_frames
-      ~max_frame_size:H2.Settings.default.max_frame_size
+      ~max_frame_size:Dream_h2.Settings.default.max_frame_size
       (fun _ -> ignore)
       handler
   in

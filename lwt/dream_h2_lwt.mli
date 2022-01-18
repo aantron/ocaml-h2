@@ -32,8 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-module type Server = H2_lwt_intf.Server
-module type Client = H2_lwt_intf.Client
+module type Server = Dream_h2_lwt_intf.Server
+module type Client = Dream_h2_lwt_intf.Client
 
 (* The function that results from [create_connection_handler] should be passed
    to [Lwt_io.establish_server_with_client_socket]. *)

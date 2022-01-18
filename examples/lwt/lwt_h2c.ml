@@ -1,13 +1,13 @@
 open Lwt.Infix
 
 module Http2 = struct
-  open H2
+  open Dream_h2
 
   let connection_handler
-      :  Dream_httpaf.Request.t -> Bigstringaf.t H2.IOVec.t list
+      :  Dream_httpaf.Request.t -> Bigstringaf.t Dream_h2.IOVec.t list
       -> (Server_connection.t, string) result
     =
-    let request_handler : H2.Server_connection.request_handler =
+    let request_handler : Dream_h2.Server_connection.request_handler =
      fun request_descriptor ->
       let request = Reqd.request request_descriptor in
       match request.meth, request.target with
@@ -66,7 +66,7 @@ module Http2 = struct
       Body.Writer.close response_body
     in
     fun http_request request_body ->
-      H2.Server_connection.create_h2c
+      Dream_h2.Server_connection.create_h2c
         ?config:None
         ~http_request
         ~request_body
@@ -84,7 +84,7 @@ let connection_handler =
     let off = 0 in
     let len = 3 in
     let body =
-      [ { H2.IOVec.buffer = Bigstringaf.of_string ~off ~len "foo"; off; len }
+      [ { Dream_h2.IOVec.buffer = Bigstringaf.of_string ~off ~len "foo"; off; len }
       ; { buffer = Bigstringaf.of_string ~off ~len "bar"; off; len }
       ; { buffer = Bigstringaf.of_string ~off ~len "baz"; off; len }
       ]
@@ -92,7 +92,7 @@ let connection_handler =
     let connection =
       Stdlib.Result.get_ok (Http2.connection_handler request body)
     in
-    upgrade (Dream_gluten.make (module H2.Server_connection) connection)
+    upgrade (Dream_gluten.make (module Dream_h2.Server_connection) connection)
   in
   let http_error_handler _client_address ?request:_ error handle =
     let message =

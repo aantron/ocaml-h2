@@ -1,5 +1,5 @@
 (library
- (public_name hpack)
+ (public_name dream-hpack)
  (libraries angstrom faraday))
 
 (rule

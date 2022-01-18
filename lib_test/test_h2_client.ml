@@ -1,6 +1,6 @@
 open Test_common
-open H2
-open H2__
+open Dream_h2
+open Dream_h2__
 module Writer = Serialize.Writer
 
 module Client_connection_tests = struct

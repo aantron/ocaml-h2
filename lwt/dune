@@ -1,4 +1,4 @@
 (library
- (name h2_lwt)
- (public_name h2-lwt)
- (libraries lwt h2 gluten gluten-lwt))
+ (name dream_h2_lwt)
+ (public_name dream-h2-lwt)
+ (libraries lwt dream-h2 dream-gluten dream-gluten-lwt))

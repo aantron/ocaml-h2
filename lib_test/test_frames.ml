@@ -1,4 +1,4 @@
-open H2__
+open Dream_h2__
 open Test_common
 module Json = Yojson.Basic.Util
 

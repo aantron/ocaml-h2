@@ -7,9 +7,9 @@ let http1_handler =
     ~error_handler:Http1_handler.error_handler
 
 let h2_handler =
-  H2_lwt_unix.Server.SSL.create_connection_handler
-    ~request_handler:H2_handler.request_handler
-    ~error_handler:H2_handler.error_handler
+  Dream_h2_lwt_unix.Server.SSL.create_connection_handler
+    ~request_handler:Dream_h2_handler.request_handler
+    ~error_handler:Dream_h2_handler.error_handler
 
 let start_http_server () =
   let open Lwt.Infix in

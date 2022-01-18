@@ -140,7 +140,7 @@ type t =
   { header_table_size : int
   ; enable_push : bool
   ; max_concurrent_streams : int32
-  ; (* Indicates the amount tokens the peer allows an H2 endpoint to send. *)
+  ; (* Indicates the amount tokens the peer allows an Dream_h2 endpoint to send. *)
     initial_window_size : WindowSize.t
   ; max_frame_size : int
   ; max_header_list_size : int option

@@ -1,4 +1,4 @@
 (library
- (name h2_async)
- (public_name h2-async)
- (libraries async core faraday-async gluten-async h2))
+ (name dream_h2_async)
+ (public_name dream-h2-async)
+ (libraries async core faraday-async dream-gluten-async dream-h2))

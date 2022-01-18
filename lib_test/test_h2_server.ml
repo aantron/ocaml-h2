@@ -1,6 +1,6 @@
 open Test_common
-open H2
-open H2__
+open Dream_h2
+open Dream_h2__
 
 module Server_connection_tests = struct
   open Server_connection

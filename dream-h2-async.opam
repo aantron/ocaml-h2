@@ -11,19 +11,15 @@ build: [
 ]
 depends: [
   "ocaml" {>= "4.06"}
-  "faraday-lwt-unix"
-  "h2-lwt" {>= version}
   "dune" {>= "1.7"}
-  "lwt"
-  "gluten-lwt-unix" {>= "0.2.1"}
+  "faraday-async"
+  "async"
+  "dream-gluten-async"
+  "dream-h2" {>= version}
 ]
-depopts: [
-  "tls"
-  "lwt_ssl"
-]
-synopsis: "Lwt + UNIX support for h2"
+depopts: ["async_ssl"]
+synopsis: "Async support for h2"
 description: """
 h2 is an implementation of the HTTP/2 specification entirely in OCaml.
-h2-lwt-unix provides an Lwt runtime implementation for h2 that targets UNIX
-binaries.
+h2-async provides an Async runtime implementation for h2.
 """

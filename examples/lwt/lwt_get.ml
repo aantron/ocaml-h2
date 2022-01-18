@@ -1,5 +1,5 @@
-open H2
-module Client = H2_lwt_unix.Client
+open Dream_h2
+module Client = Dream_h2_lwt_unix.Client
 
 let response_handler notify_response_received _response response_body =
   let rec read_response () =

@@ -30,19 +30,19 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-open H2
+open Dream_h2
 
 (* The function that results from [create_connection_handler] should be passed
    to [Lwt_io.establish_server_with_client_socket]. *)
 module Server : sig
   include
-    H2_lwt.Server
+    Dream_h2_lwt.Server
       with type socket = Lwt_unix.file_descr
        and type addr := Unix.sockaddr
 
   module TLS : sig
     include
-      H2_lwt.Server
+      Dream_h2_lwt.Server
         with type socket = Dream_gluten_lwt_unix.Server.TLS.socket
          and type addr := Unix.sockaddr
 
@@ -59,7 +59,7 @@ module Server : sig
 
   module SSL : sig
     include
-      H2_lwt.Server
+      Dream_h2_lwt.Server
         with type socket = Dream_gluten_lwt_unix.Server.SSL.socket
          and type addr := Unix.sockaddr
 
@@ -77,13 +77,13 @@ end
 
 module Client : sig
   include
-    H2_lwt.Client
+    Dream_h2_lwt.Client
       with type socket = Lwt_unix.file_descr
        and type runtime = Dream_gluten_lwt_unix.Client.t
 
   module TLS : sig
     include
-      H2_lwt.Client
+      Dream_h2_lwt.Client
         with type socket = Dream_gluten_lwt_unix.Client.TLS.socket
          and type runtime = Dream_gluten_lwt_unix.Client.TLS.t
 
@@ -98,7 +98,7 @@ module Client : sig
 
   module SSL : sig
     include
-      H2_lwt.Client
+      Dream_h2_lwt.Client
         with type socket = Dream_gluten_lwt_unix.Client.SSL.socket
          and type runtime = Dream_gluten_lwt_unix.Client.SSL.t
 

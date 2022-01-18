@@ -1,4 +1,4 @@
-open H2
+open Dream_h2
 
 let request_handler : Reqd.t -> unit =
  fun request_descriptor ->
@@ -19,7 +19,7 @@ let request_handler : Reqd.t -> unit =
     "Welcome to an ALPN-negotiated HTTP/2 connection"
 
 let error_handler
-    : ?request:H2.Request.t -> _ -> (Headers.t -> Body.Writer.t) -> unit
+    : ?request:Dream_h2.Request.t -> _ -> (Headers.t -> Body.Writer.t) -> unit
   =
  fun ?request:_ _error start_response ->
   let response_body = start_response Headers.empty in

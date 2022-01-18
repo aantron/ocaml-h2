@@ -1,4 +1,4 @@
-open H2
+open Dream_h2
 
 module Headers_tests = struct
   let check = Alcotest.(check (list (pair string string)))

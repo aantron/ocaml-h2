@@ -30,7 +30,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-open H2
+open Dream_h2
 
 module type Server = sig
   type socket
@@ -52,7 +52,7 @@ module type Client = sig
   type runtime
 
   type t =
-    { connection : H2.Client_connection.t
+    { connection : Dream_h2.Client_connection.t
     ; runtime : runtime
     }
 

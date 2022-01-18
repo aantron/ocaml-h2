@@ -1,7 +1,7 @@
 open Lwt.Infix
-open H2
+open Dream_h2
 
-module type HTTP2 = H2_mirage.Server
+module type HTTP2 = Dream_h2_mirage.Server
 
 module Dispatch (C : Mirage_console.S) (Http2 : HTTP2) = struct
   let log c fmt = Printf.ksprintf (C.log c) fmt

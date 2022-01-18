@@ -12,13 +12,13 @@ let
       root = ./..;
       include = [ "dune-project" ] ++ files ++ (builtins.map inDirectory dirs);
     };
-  buildH2 = args: buildDunePackage ({
+  buildbuildDream_h2 = args: buildDunePackage ({
     version = "0.6.0-dev";
     useDune2 = true;
     doCheck = doCheck;
   } // args);
   h2Pkgs = rec {
-    hpack = buildH2 {
+    hpack = buildDream_h2 {
       pname = "hpack";
       src = genSrc {
         dirs = [ "hpack" ];
@@ -32,7 +32,7 @@ let
       '';
     };
 
-    h2 = buildH2 {
+    h2 = buildDream_h2 {
       pname = "h2";
       src = genSrc {
         dirs = [ "lib" "lib_test" ];
@@ -51,7 +51,7 @@ let
     };
 
     # These two don't have tests
-    h2-lwt = buildH2 {
+    h2-lwt = buildDream_h2 {
       pname = "h2-lwt";
       src = genSrc {
         dirs = [ "lwt" ];
@@ -61,7 +61,7 @@ let
       propagatedBuildInputs = [ h2 lwt gluten-lwt ];
     };
 
-    h2-lwt-unix = buildH2 {
+    h2-lwt-unix = buildDream_h2 {
       pname = "h2-lwt-unix";
       src = genSrc {
         dirs = [ "lwt-unix" ];
@@ -75,7 +75,7 @@ let
         lwt_ssl
       ];
     };
-    h2-async = buildH2 {
+    h2-async = buildDream_h2 {
       pname = "h2-async";
       src = genSrc {
         dirs = [ "async" ];
@@ -91,7 +91,7 @@ let
       ];
     };
 
-    h2-mirage = buildH2 {
+    h2-mirage = buildDream_h2 {
       pname = "h2-mirage";
       src = genSrc {
         dirs = [ "mirage" ];

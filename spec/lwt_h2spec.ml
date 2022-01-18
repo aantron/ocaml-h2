@@ -3,7 +3,7 @@ let set_interval s f =
   Lwt_timeout.start timeout
 
 let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
-  let open H2 in
+  let open Dream_h2 in
   let request_handler : Unix.sockaddr -> Reqd.t -> unit =
    fun _client_address request_descriptor ->
     let request = Reqd.request request_descriptor in
@@ -74,7 +74,7 @@ let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
       respond ()
   in
   let error_handler
-      :  Unix.sockaddr -> ?request:H2.Request.t -> _
+      :  Unix.sockaddr -> ?request:Dream_h2.Request.t -> _
       -> (Headers.t -> Body.Writer.t) -> unit
     =
    fun _client_address ?request:_ error start_response ->
@@ -89,8 +89,8 @@ let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
         (Status.default_reason_phrase error));
     Body.Writer.close response_body
   in
-  H2_lwt_unix.Server.create_connection_handler
-    ~config:{ H2.Config.default with max_concurrent_streams = 2l }
+  Dream_h2_lwt_unix.Server.create_connection_handler
+    ~config:{ Dream_h2.Config.default with max_concurrent_streams = 2l }
     ~request_handler
     ~error_handler
 

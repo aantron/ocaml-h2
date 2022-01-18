@@ -1,7 +1,7 @@
 open Core
 open Async
-open H2
-open H2_async
+open Dream_h2
+open Dream_h2_async
 
 let error_handler _ ?request:_ error start_response =
   let response_body = start_response Headers.empty in

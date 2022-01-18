@@ -33,17 +33,17 @@
  *---------------------------------------------------------------------------*)
 
 open Async
-open H2
+open Dream_h2
 
 module Server : sig
   include
-    H2_async_intf.Server
+    Dream_h2_async_intf.Server
       with type 'a socket =
         ([ `Active ], ([< Socket.Address.t ] as 'a)) Socket.t
 
   module SSL : sig
     include
-      H2_async_intf.Server
+      Dream_h2_async_intf.Server
         with type 'a socket := 'a Dream_gluten_async.Server.SSL.socket
 
     val create_connection_handler_with_default
@@ -60,13 +60,13 @@ end
 
 module Client : sig
   include
-    H2_async_intf.Client
+    Dream_h2_async_intf.Client
       with type 'a socket =
         ([ `Active ], ([< Socket.Address.t ] as 'a)) Socket.t
 
   module SSL : sig
     include
-      H2_async_intf.Client
+      Dream_h2_async_intf.Client
         with type 'a socket = 'a Dream_gluten_async.Client.SSL.socket
 
     val create_connection_with_default

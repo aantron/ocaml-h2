@@ -1,4 +1,4 @@
 (library
- (name h2_mirage)
- (public_name h2-mirage)
- (libraries h2 h2-lwt gluten-mirage lwt mirage-flow cstruct))
+ (name dream_h2_mirage)
+ (public_name dream-h2-mirage)
+ (libraries dream-h2 dream-h2-lwt dream-gluten-mirage lwt mirage-flow cstruct))

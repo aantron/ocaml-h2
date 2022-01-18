@@ -1,4 +1,4 @@
-open H2
+open Dream_h2
 
 let response_handler notify_response_received response response_body =
   match Response.(response.status) with
@@ -65,9 +65,9 @@ let () =
       in
       let response_received, notify_response_received = Lwt.wait () in
       let response_handler = response_handler notify_response_received in
-      H2_lwt_unix.Client.create_connection ~error_handler socket >>= fun conn ->
+      Dream_h2_lwt_unix.Client.create_connection ~error_handler socket >>= fun conn ->
       let request_body =
-        H2_lwt_unix.Client.request
+        Dream_h2_lwt_unix.Client.request
           conn
           request_headers
           ~error_handler

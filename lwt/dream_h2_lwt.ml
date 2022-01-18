@@ -33,27 +33,27 @@
  *---------------------------------------------------------------------------*)
 
 open Lwt.Infix
-include H2_lwt_intf
+include Dream_h2_lwt_intf
 
 module Server (Server_runtime : Dream_gluten_lwt.Server) = struct
   type socket = Server_runtime.socket
 
   let create_connection_handler
-      ?(config = H2.Config.default)
+      ?(config = Dream_h2.Config.default)
       ~request_handler
       ~error_handler
       client_addr
       socket
     =
     let connection =
-      H2.Server_connection.create
+      Dream_h2.Server_connection.create
         ~config
         ~error_handler:(error_handler client_addr)
         (request_handler client_addr)
     in
     Server_runtime.create_connection_handler
       ~read_buffer_size:config.read_buffer_size
-      ~protocol:(module H2.Server_connection)
+      ~protocol:(module Dream_h2.Server_connection)
       connection
       client_addr
       socket
@@ -64,31 +64,31 @@ module Client (Client_runtime : Dream_gluten_lwt.Client) = struct
   type runtime = Client_runtime.t
 
   type t =
-    { connection : H2.Client_connection.t
+    { connection : Dream_h2.Client_connection.t
     ; runtime : runtime
     }
 
   let create_connection
-      ?(config = H2.Config.default)
+      ?(config = Dream_h2.Config.default)
       ?push_handler
       ~error_handler
       socket
     =
     let connection =
-      H2.Client_connection.create ~config ?push_handler ~error_handler ()
+      Dream_h2.Client_connection.create ~config ?push_handler ~error_handler ()
     in
     Client_runtime.create
       ~read_buffer_size:config.read_buffer_size
-      ~protocol:(module H2.Client_connection)
+      ~protocol:(module Dream_h2.Client_connection)
       connection
       socket
     >|= fun runtime -> { runtime; connection }
 
-  let request t = H2.Client_connection.request t.connection
+  let request t = Dream_h2.Client_connection.request t.connection
 
   let ping ?payload ?off { connection; _ } =
     let t, u = Lwt.task () in
-    H2.Client_connection.ping ?payload ?off connection (Lwt.wakeup_later u);
+    Dream_h2.Client_connection.ping ?payload ?off connection (Lwt.wakeup_later u);
     t
 
   let shutdown t = Client_runtime.shutdown t.runtime

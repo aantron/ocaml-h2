@@ -30,9 +30,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-open H2
+open Dream_h2
 
-(* Note: could theoretically be `H2_lwt.Server with type socket := flow and
+(* Note: could theoretically be `Dream_h2_lwt.Server with type socket := flow and
  * type addr := unit` but the signature for `create_connection_handler` takes
  * one less arg in Mirage (client address). *)
 module type Server = sig
@@ -48,6 +48,6 @@ end
 
 module Server (Flow : Mirage_flow.S) : Server with type socket = Flow.flow
 
-module type Client = H2_lwt.Client
+module type Client = Dream_h2_lwt.Client
 
 module Client (Flow : Mirage_flow.S) : Client with type socket = Flow.flow

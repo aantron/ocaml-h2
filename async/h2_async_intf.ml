@@ -31,7 +31,7 @@
  *---------------------------------------------------------------------------*)
 
 open Async
-open H2
+open Dream_h2
 
 module type Server = sig
   type 'a socket constraint 'a = [< Socket.Address.t ]

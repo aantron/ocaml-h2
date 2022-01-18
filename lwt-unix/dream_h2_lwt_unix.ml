@@ -31,13 +31,13 @@
  *---------------------------------------------------------------------------*)
 
 open Lwt.Infix
-module Config = H2.Config
+module Config = Dream_h2.Config
 
 module Server = struct
-  include H2_lwt.Server (Dream_gluten_lwt_unix.Server)
+  include Dream_h2_lwt.Server (Dream_gluten_lwt_unix.Server)
 
   module TLS = struct
-    include H2_lwt.Server (Dream_gluten_lwt_unix.Server.TLS)
+    include Dream_h2_lwt.Server (Dream_gluten_lwt_unix.Server.TLS)
 
     let create_connection_handler_with_default
         ~certfile
@@ -63,7 +63,7 @@ module Server = struct
   end
 
   module SSL = struct
-    include H2_lwt.Server (Dream_gluten_lwt_unix.Server.SSL)
+    include Dream_h2_lwt.Server (Dream_gluten_lwt_unix.Server.SSL)
 
     let create_connection_handler_with_default
         ~certfile
@@ -90,10 +90,10 @@ module Server = struct
 end
 
 module Client = struct
-  include H2_lwt.Client (Dream_gluten_lwt_unix.Client)
+  include Dream_h2_lwt.Client (Dream_gluten_lwt_unix.Client)
 
   module TLS = struct
-    include H2_lwt.Client (Dream_gluten_lwt_unix.Client.TLS)
+    include Dream_h2_lwt.Client (Dream_gluten_lwt_unix.Client.TLS)
 
     let create_connection_with_default
         ?config
@@ -107,7 +107,7 @@ module Client = struct
   end
 
   module SSL = struct
-    include H2_lwt.Client (Dream_gluten_lwt_unix.Client.SSL)
+    include Dream_h2_lwt.Client (Dream_gluten_lwt_unix.Client.SSL)
 
     let create_connection_with_default
         ?config

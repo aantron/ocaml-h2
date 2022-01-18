@@ -37,7 +37,7 @@
  *   status code ([RFC7231], Section 6.2.2).
  *
  *   Note: While the above is true, we don't enforce in this library, as it
- *   makes unifying types with http/af much easier. `H2.Status.t` is, thus, a
+ *   makes unifying types with http/af much easier. `Dream_h2.Status.t` is, thus, a
  *   strict superset of `Dream_httpaf.Status.t`. *)
 
 include (

@@ -67,9 +67,9 @@ let default =
      *   streams that the sender permits the receiver to create. *)
     max_concurrent_streams = Settings.default.max_concurrent_streams
   ; (* Indicates the initial window size when receiving data from remote
-     * streams. In other words, represents the amount of octets that the H2
+     * streams. In other words, represents the amount of octets that the Dream_h2
      * endpoint is willing to receive from the peer. Cannot be lower than
-     * 65535 (the default as per the spec). The default in H2 is 2^27, or
+     * 65535 (the default as per the spec). The default in Dream_h2 is 2^27, or
      * 128 MiB. *)
     (* TODO(anmonteiro): validate the default somewhere. *)
     initial_window_size = Int32.shift_left 1l 27

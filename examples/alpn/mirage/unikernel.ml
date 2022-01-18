@@ -21,7 +21,7 @@
 open Lwt.Infix
 
 module type HTTP = Dream_httpaf_mirage.Server
-module type HTTP2 = H2_mirage.Server
+module type HTTP2 = Dream_h2_mirage.Server
 
 module Dispatch (Http : HTTP) (Https : HTTP) (Http2 : HTTP2) = struct
   let redirect =
@@ -39,8 +39,8 @@ module Dispatch (Http : HTTP) (Https : HTTP) (Http2 : HTTP2) = struct
   let h2_handler =
     Http2.create_connection_handler
       ?config:None
-      ~request_handler:H2_handler.request_handler
-      ~error_handler:H2_handler.error_handler
+      ~request_handler:Dream_h2_handler.request_handler
+      ~error_handler:Dream_h2_handler.error_handler
 end
 
 module Make
@@ -55,7 +55,7 @@ struct
   module TLS = Tls_mirage.Make (TCP)
   module Http = Dream_httpaf_mirage.Server (TCP)
   module Https = Dream_httpaf_mirage.Server (TLS)
-  module Http2 = H2_mirage.Server (TLS)
+  module Http2 = Dream_h2_mirage.Server (TLS)
   module D = Dispatch (Http) (Https) (Http2)
 
   let log_src = Logs.Src.create "dispatch_tls" ~doc:"web-over-tls server"

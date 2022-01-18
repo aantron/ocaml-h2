@@ -1,4 +1,4 @@
 (library
- (name h2_lwt_unix)
- (public_name h2-lwt-unix)
- (libraries faraday-lwt-unix h2 h2-lwt gluten-lwt-unix lwt.unix))
+ (name dream_h2_lwt_unix)
+ (public_name dream-h2-lwt-unix)
+ (libraries faraday-lwt-unix dream-h2 dream-h2-lwt dream-gluten-lwt-unix lwt.unix))

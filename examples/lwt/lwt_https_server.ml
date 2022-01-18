@@ -11,7 +11,7 @@ let set_interval ?(times = 5) s f destroy =
   set_interval_loop s f times
 
 let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
-  let open H2 in
+  let open Dream_h2 in
   let request_handler : Unix.sockaddr -> Reqd.t -> unit =
    fun _client_address request_descriptor ->
     let request = Reqd.request request_descriptor in
@@ -75,7 +75,7 @@ let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
         ""
   in
   let error_handler
-      :  Unix.sockaddr -> ?request:H2.Request.t -> _
+      :  Unix.sockaddr -> ?request:Dream_h2.Request.t -> _
       -> (Headers.t -> Body.Writer.t) -> unit
     =
    fun _client_address ?request:_ _error start_response ->
@@ -89,7 +89,7 @@ let connection_handler : Unix.sockaddr -> Lwt_unix.file_descr -> unit Lwt.t =
   in
   let certfile = "./certificates/server.pem" in
   let keyfile = "./certificates/server.key" in
-  H2_lwt_unix.Server.SSL.create_connection_handler_with_default
+  Dream_h2_lwt_unix.Server.SSL.create_connection_handler_with_default
     ~certfile
     ~keyfile
     ?config:None

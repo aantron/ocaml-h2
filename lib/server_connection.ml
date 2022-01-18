@@ -1399,7 +1399,7 @@ let read_eof t bs ~off ~len =
 (* XXX(anmonteiro): this function is here to please the Dream_gluten `RUNTIME`
  * interface.
  *
- * We don't expect this function to ever be called. H2 never issues `Yield`
+ * We don't expect this function to ever be called. Dream_h2 never issues `Yield`
  * commands because the connection is multiplexed, and it's therefore always
  * looking to read frames from the peer. *)
 let yield_reader _t k = k ()
