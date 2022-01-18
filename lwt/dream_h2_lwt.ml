@@ -33,7 +33,7 @@
  *---------------------------------------------------------------------------*)
 
 open Lwt.Infix
-include Dream_h2_lwt_intf
+include H2_lwt_intf
 
 module Server (Server_runtime : Dream_gluten_lwt.Server) = struct
   type socket = Server_runtime.socket
