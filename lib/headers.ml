@@ -35,7 +35,7 @@
 type name = string
 type value = string
 
-type header = Hpack.header =
+type header = Dream_hpack.header =
   { name : name
   ; value : value
   ; sensitive : bool

@@ -134,7 +134,7 @@ module Server_connection_tests = struct
 
   let request_to_string ?body request =
     let has_body = match body with None -> false | Some _ -> true in
-    let hpack_encoder = Hpack.Encoder.create 4096 in
+    let hpack_encoder = Dream_hpack.Encoder.create 4096 in
     let writer = Serialize.Writer.create 0x400 in
     let frame_info =
       Writer.make_frame_info
@@ -256,7 +256,7 @@ module Server_connection_tests = struct
 
   (* Well-formed HEADERS + CONTINUATION frames. *)
   let header_and_continuation_frames =
-    let hpack_encoder = Hpack.Encoder.create 4096 in
+    let hpack_encoder = Dream_hpack.Encoder.create 4096 in
     let headers =
       { Frame.frame_header =
           { payload_length = 0
@@ -381,7 +381,7 @@ module Server_connection_tests = struct
   let test_read_frame_size_error () =
     let max_length = String.length (preface ()) in
     let config = { Config.default with read_buffer_size = max_length } in
-    let hpack_encoder = Hpack.Encoder.create 4096 in
+    let hpack_encoder = Dream_hpack.Encoder.create 4096 in
     let headers =
       { Frame.frame_header =
           { payload_length = 0
@@ -608,7 +608,7 @@ module Server_connection_tests = struct
 
   let test_dependent_stream () =
     let t = create_and_handle_preface ~error_handler data_request_handler in
-    let hpack_encoder = Hpack.Encoder.create 4096 in
+    let hpack_encoder = Dream_hpack.Encoder.create 4096 in
     let headers =
       { Frame.frame_header =
           { payload_length = 0

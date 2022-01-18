@@ -75,8 +75,8 @@ type t =
         (* From RFC7540§4.3:
          *   Header compression is stateful. One compression context and one
          *   decompression context are used for the entire connection. *)
-  ; hpack_encoder : Hpack.Encoder.t
-  ; hpack_decoder : Hpack.Decoder.t
+  ; hpack_encoder : Dream_hpack.Encoder.t
+  ; hpack_decoder : Dream_hpack.Decoder.t
   }
 
 let default_push_handler = Sys.opaque_identity (fun _ -> Ok (fun _ _ -> ()))
@@ -445,7 +445,7 @@ let create_partial_headers t flags headers_block =
   { Stream.parse_state =
       AB.parse
         ~initial_buffer_size
-        (Hpack.Decoder.decode_headers t.hpack_decoder)
+        (Dream_hpack.Decoder.decode_headers t.hpack_decoder)
   ; end_stream = Flags.test_end_stream flags
   }
 
@@ -487,7 +487,7 @@ let process_trailer_headers t stream active_response frame_header headers_block 
   else
     let partial_headers =
       { Stream.parse_state =
-          AB.parse (Hpack.Decoder.decode_headers t.hpack_decoder)
+          AB.parse (Dream_hpack.Decoder.decode_headers t.hpack_decoder)
           (* obviously true at this point. *)
       ; end_stream
       }
@@ -849,7 +849,7 @@ let process_settings_frame t { Frame.frame_header; _ } settings =
                *   Allows the sender to inform the remote endpoint of the maximum
                *   size of the header compression table used to decode header
                *   blocks, in octets. *)
-              Hpack.Encoder.set_capacity t.hpack_encoder x;
+              Dream_hpack.Encoder.set_capacity t.hpack_encoder x;
               { acc with header_table_size = x }
             | EnablePush x ->
               (* We've already verified that this setting is either 0 or 1 in the
@@ -1254,8 +1254,8 @@ let create ?(config = Config.default) ?push_handler ~error_handler () =
           (* From RFC7540§4.3:
            *   Header compression is stateful. One compression context and one
            *   decompression context are used for the entire connection. *)
-      ; hpack_encoder = Hpack.Encoder.(create settings.header_table_size)
-      ; hpack_decoder = Hpack.Decoder.(create settings.header_table_size)
+      ; hpack_encoder = Dream_hpack.Encoder.(create settings.header_table_size)
+      ; hpack_decoder = Dream_hpack.Decoder.(create settings.header_table_size)
       }
   in
   let t = Lazy.force t in

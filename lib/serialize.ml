@@ -459,13 +459,13 @@ module Writer = struct
 
   let encode_headers hpack_encoder faraday headers =
     List.iter
-      (fun header -> Hpack.Encoder.encode_header hpack_encoder faraday header)
+      (fun header -> Dream_hpack.Encoder.encode_header hpack_encoder faraday header)
       (Headers.to_hpack_list headers)
 
   let write_request_like_frame t hpack_encoder ~write_frame frame_info request =
     let { Request.meth; target; scheme; headers } = request in
     let faraday = Faraday.create 0x1000 in
-    Hpack.Encoder.encode_header
+    Dream_hpack.Encoder.encode_header
       hpack_encoder
       faraday
       { Headers.name = ":method"
@@ -476,11 +476,11 @@ module Writer = struct
     then (
       (* From RFC7540§8.3:
        *   The :scheme and :path pseudo-header fields MUST be omitted. *)
-      Hpack.Encoder.encode_header
+      Dream_hpack.Encoder.encode_header
         hpack_encoder
         faraday
         { Headers.name = ":path"; value = target; sensitive = false };
-      Hpack.Encoder.encode_header
+      Dream_hpack.Encoder.encode_header
         hpack_encoder
         faraday
         { Headers.name = ":scheme"; value = scheme; sensitive = false });
@@ -509,7 +509,7 @@ module Writer = struct
        *   that carries the HTTP status code field (see [RFC7231], Section 6).
        *   This pseudo-header field MUST be included in all responses; otherwise,
        *   the response is malformed (Section 8.1.2.6). *)
-      Hpack.Encoder.encode_header
+      Dream_hpack.Encoder.encode_header
         hpack_encoder
         faraday
         { Headers.name = ":status"

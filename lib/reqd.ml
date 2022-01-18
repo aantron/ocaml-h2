@@ -67,7 +67,7 @@ type active_state = (request_info, request_info) Stream.active_state
 
 type active_stream =
   { body_buffer_size : int
-  ; encoder : Hpack.Encoder.t
+  ; encoder : Dream_hpack.Encoder.t
   ; mutable response_state : response_state
         (* We're not doing anything with these yet, we could probably have a
          * `Reqd.schedule_read_trailers` function that would be called once

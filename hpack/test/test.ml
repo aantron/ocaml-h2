@@ -1,4 +1,4 @@
-open Hpack
+open Dream_hpack
 module Json = Yojson.Basic.Util
 
 let parse_file file =
@@ -25,7 +25,7 @@ let parse_file file =
           List.map
             (function
               | `Assoc [ (name, `String value) ] ->
-                { Hpack.name; value; sensitive = false }
+                { Dream_hpack.name; value; sensitive = false }
               | _ -> assert false)
             Json.(case |> member "headers" |> to_list)
         in
@@ -43,7 +43,7 @@ let encode_headers encoder headers =
   Faraday.serialize_to_string faraday
 
 let encode cases =
-  let encoder = Hpack.Encoder.create 4096 in
+  let encoder = Dream_hpack.Encoder.create 4096 in
   List.mapi
     (fun seq (_nosize, _nowire, headers) ->
       let wire = encode_headers encoder headers in
