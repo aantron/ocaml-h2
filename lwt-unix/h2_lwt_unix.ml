@@ -30,6 +30,10 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Gluten_lwt_unix = Dream_gluten_lwt_unix.Gluten_lwt_unix
+module H2 = Dream_h2.H2
+module H2_lwt = Dream_h2_lwt.H2_lwt
+
 open Lwt.Infix
 module Config = H2.Config
 

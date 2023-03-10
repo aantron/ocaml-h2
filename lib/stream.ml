@@ -30,6 +30,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Hpack = Dream_hpack.Hpack
+
 module AB = Angstrom.Buffered
 module Writer = Serialize.Writer
 

@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Httpaf = Dream_httpaf_.Httpaf
+
 module Headers = Headers
 module IOVec = Httpaf.IOVec
 module Method = Httpaf.Method

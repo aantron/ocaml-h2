@@ -30,6 +30,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Gluten_eio = Dream_gluten_eio.Gluten_eio
+module H2 = Dream_h2.H2
+
 module Server = struct
   let create_connection_handler
       ?(config = H2.Config.default)

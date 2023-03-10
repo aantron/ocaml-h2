@@ -30,7 +30,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
-open H2
+open Dream_h2.H2
 
 module type Server = sig
   type socket
@@ -46,6 +46,8 @@ module type Server = sig
 end
 
 module type Client = sig
+  module H2 = Dream_h2.H2
+
   type socket
 
   (* The underlying Gluten runtime *)

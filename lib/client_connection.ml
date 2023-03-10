@@ -32,6 +32,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Httpaf = Dream_httpaf_.Httpaf
+module Hpack = Dream_hpack.Hpack
+
 module AB = Angstrom.Buffered
 module Reader = Parse.Reader
 module Writer = Serialize.Writer

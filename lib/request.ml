@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Httpaf = Dream_httpaf_.Httpaf
+
 type t =
   { meth : Httpaf.Method.t
   ; target : string

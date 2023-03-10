@@ -32,6 +32,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Hpack = Dream_hpack.Hpack
+module Httpaf = Dream_httpaf_.Httpaf
+
 module Writer = Serialize.Writer
 
 type error =

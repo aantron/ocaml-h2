@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Gluten_lwt = Dream_gluten_lwt.Gluten_lwt
+
 module type Server = H2_lwt_intf.Server
 module type Client = H2_lwt_intf.Client
 

@@ -32,6 +32,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Httpaf = Dream_httpaf_.Httpaf
+module Hpack = Dream_hpack.Hpack
+
 type name = string
 type value = string
 

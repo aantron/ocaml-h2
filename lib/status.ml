@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*)
 
+module Httpaf = Dream_httpaf_.Httpaf
+
 (* From RFC7540§8.1.1:
  *   HTTP/2 removes support for the 101 (Switching Protocols) informational
  *   status code ([RFC7231], Section 6.2.2).
